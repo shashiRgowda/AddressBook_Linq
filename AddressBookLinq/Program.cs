@@ -6,8 +6,7 @@ namespace AddressBookService_Linq
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Address book linq problem!");
-            AddressBook Service = new AddressBook();
+            Console.WriteLine("Hello World!");
         }
     }
 }
