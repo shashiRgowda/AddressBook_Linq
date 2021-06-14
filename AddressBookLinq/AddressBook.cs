@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
 
-namespace AddressBookService_Linq
+namespace AddressBookLinq
 {
-    internal class AddressBook
+    class AddressBook
     {
         public DataTable AddressBookDataTable()
         {
@@ -53,6 +56,17 @@ namespace AddressBookService_Linq
 
             Console.WriteLine("The Contact is updated succesfully!\n");
             GetAllContacts(contacts.CopyToDataTable());
+        }
+
+        public void DeleteContact(DataTable table)
+        {
+            var contacts = table.AsEnumerable().Where(x => x.Field<string>("FirstName") == "Nandan");
+            foreach (var row in contacts.ToList())
+            {
+                row.Delete();
+            }
+            Console.WriteLine("The Contact is deleted succesfully!\n");
+            GetAllContacts(table);
         }
     }
 }

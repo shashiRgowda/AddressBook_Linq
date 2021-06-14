@@ -12,7 +12,8 @@ namespace AddressBookService_Linq
             AddressBook addressBook = new AddressBook();
             DataTable dataTable = addressBook.AddressBookDataTable();
             //addressBook.GetAllContacts(dataTable);
-            addressBook.EditContact(dataTable);
+            //addressBook.EditContact(dataTable);
+            addressBook.DeleteContact(dataTable);
             Console.ReadLine();
         }
     }
