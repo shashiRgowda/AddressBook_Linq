@@ -77,9 +77,11 @@ namespace AddressBookService_Linq
                 Console.WriteLine("\n");
             }
         }
+        public void GetSizeByCity(DataTable table)
+        {
+            var contacts = table.Rows.Cast<DataRow>()
+                             .GroupBy(x => x["City"].Equals("Chennai")).Count();
+            Console.WriteLine(" : {0} ", contacts);
+        }
     }
 }
-    
-
-    
-
