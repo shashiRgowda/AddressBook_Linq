@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace AddressBookLinq
+namespace AddressBookService_Linq
 {
     class AddressBook
     {
@@ -57,7 +57,6 @@ namespace AddressBookLinq
             Console.WriteLine("The Contact is updated succesfully!\n");
             GetAllContacts(contacts.CopyToDataTable());
         }
-
         public void DeleteContact(DataTable table)
         {
             var contacts = table.AsEnumerable().Where(x => x.Field<string>("FirstName") == "Nandan");
@@ -68,5 +67,19 @@ namespace AddressBookLinq
             Console.WriteLine("The Contact is deleted succesfully!\n");
             GetAllContacts(table);
         }
+        public void RetrieveContactByState(DataTable table)
+        {
+            var contacts = table.AsEnumerable().Where(x => x.Field<string>("State") == "Karnataka");
+            foreach (var contact in contacts)
+            {
+                Console.Write("First Name : " + contact.Field<string>("FirstName") + " " + "Last Name : " + contact.Field<string>("LastName") + " " + "Address : " + contact.Field<string>("Address") + " " + "City : " + contact.Field<string>("City") + " " + "State : " + contact.Field<string>("State")
+                     + " " + "Zip : " + contact.Field<string>("Zip") + " " + "Phone Number : " + contact.Field<string>("PhoneNumber") + " " + "Email : " + contact.Field<string>("Email") + " ");
+                Console.WriteLine("\n");
+            }
+        }
     }
 }
+    
+
+    
+
