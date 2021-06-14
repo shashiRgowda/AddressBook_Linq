@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Data;
 
 namespace AddressBookService_Linq
 {
-    class AddressBook
+    internal class AddressBook
     {
         public DataTable AddressBookDataTable()
         {
@@ -24,6 +23,36 @@ namespace AddressBookService_Linq
             table.Rows.Add("Nandan", "Kumar", "HSR layout", "chennai", "AndraPradesh", "563103", "8197505915", "nandan@gmail.com");
             table.Rows.Add("Shalini", "Reddy", "Indhirangar", "Banglore", "Karnataka", "560057", "8710897106", "shalini@gmail.com");
             return table;
+        }
+
+        public void GetAllContacts(DataTable table)
+        {
+            foreach (DataRow dr in table.AsEnumerable())
+            {
+                Console.WriteLine("\n");
+                Console.WriteLine("FirstName:- " + dr.Field<string>("FirstName"));
+                Console.WriteLine("lastName:- " + dr.Field<string>("LastName"));
+                Console.WriteLine("Address:- " + dr.Field<string>("Address"));
+                Console.WriteLine("City:- " + dr.Field<string>("City"));
+                Console.WriteLine("State:- " + dr.Field<string>("State"));
+                Console.WriteLine("zip:- " + dr.Field<string>("Zip"));
+                Console.WriteLine("phoneNumber:- " + dr.Field<string>("phoneNumber"));
+                Console.WriteLine("eMail:- " + dr.Field<string>("Email"));
+            }
+
+        }
+        public void EditContact(DataTable table)
+        {
+            var contacts = table.AsEnumerable().Where(x => x.Field<string>("FirstName") == "Sharath");
+            foreach (var contact in contacts)
+            {
+                contact.SetField("LastName", "Gowdru");
+                contact.SetField("City", "Hasan");
+                contact.SetField("State", "Karnataka");
+            }
+
+            Console.WriteLine("The Contact is updated succesfully!\n");
+            GetAllContacts(contacts.CopyToDataTable());
         }
     }
 }
